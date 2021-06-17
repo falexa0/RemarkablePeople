@@ -6,5 +6,5 @@ Este projeto como ideia inicial será uma plataforma de entre-ajuda entre pessoa
 - Login
 - SignUp
 - Perguntar aos utilizadores qual a tarefa a realizar como utilizador. (Utilizador ou Voluntário).
-- Os utilizadores seriam ligados a voluntários e vice-versa
+- É possivel criar publicações
 - Seria criada uma especie de rede social
