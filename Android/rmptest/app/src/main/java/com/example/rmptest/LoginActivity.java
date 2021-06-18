@@ -1,4 +1,5 @@
-package com.example.rmptest;
+
+        package com.example.rmptest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,23 +20,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-       email = findViewById(R.id.email);
+        email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         registerBtn = findViewById(R.id.registerBtn);
 
-        //if the user clicks on button saying that they don't have an account than it takes them to the
-        //register activity
+       //if user clicks on button criar conta then it will go to RegisterActivity
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
 
-
+//login 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,34 +43,17 @@ public class LoginActivity extends AppCompatActivity {
                 String passwordText = password.getText().toString();
                 if (emailText.isEmpty() || passwordText.isEmpty()) {
                     //only if peronal information is empty
-                    Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();//Mostra mensagem a dizer que é necessário preencher todos os campos
+                    Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
                 } else {
                     //perform query
-                    AppDatabase userDataBase = AppDatabase.getDataBase(getApplicationContext());
-                    UserDao userDao = userDataBase.getUserDao();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            UserEntity userEntity = userDao.login(emailText, passwordText);
-                            if(userEntity == null){
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //only if personal information are wrong
-                                        Toast.makeText(getApplicationContext(), "As credenciais estão erradas", Toast.LENGTH_SHORT).show();// Se a password e username estiverem errados mostra mensagem a dizer que os dados estão errados
-                                    }
-                                });
-                            }else{
-                                MainActivity.userEntity = userEntity;
-                                MainActivity.userLoggedInId = userEntity.getId();
-                                String name = userEntity.getName();
-                                //when logged in sucessfully
-                                startActivity(new Intent(LoginActivity.this, ProfileActivity.class).putExtra("name", name)); //Começa uma nova activity (Profile Activity) no perfil do usuário
+                    UserEntity user = AppDatabase.getDataBase(LoginActivity.this).getUserDao().getUserByLogin(email.getText().toString(), password.getText().toString());
 
-                            }
+                    if(user != null){
+                        startActivity(new Intent(LoginActivity.this, FeedActivity.class));
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Credenciais erradas", Toast.LENGTH_SHORT).show();
+                    }
 
-                        }
-                    }).start();
                 }
             }
         });

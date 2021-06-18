@@ -58,7 +58,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.root = itemView;
-            this.post_user_name = itemView.findViewById(R.id.post_user_name_event);
+            this.post_user_name = itemView.findViewById(R.id.post_user_name);
             this.textViewDescription = itemView.findViewById(R.id.post_descriptionEvent);
             this.date = itemView.findViewById(R.id.dateEvent);
            this.post_profile_image = itemView.findViewById(R.id.post_profile_image_event);

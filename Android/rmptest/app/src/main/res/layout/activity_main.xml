@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".RegisterActivity"
     android:background="@drawable/transferir">
 
     <ScrollView
@@ -105,12 +105,9 @@
                 android:hint="Confirmar palavra-passe"
                 android:inputType="textPassword" />
 
-            <CheckBox
-                android:id="@+id/isVolunteer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                android:text="Voluntário" />
+
+
 
             <Button
                 android:id="@+id/register"

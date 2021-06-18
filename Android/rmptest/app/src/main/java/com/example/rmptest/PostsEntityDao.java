@@ -30,7 +30,4 @@ public interface PostsEntityDao {
     @Query("SELECT * FROM posts Where userId = :id")
     List<PostsEntity> getByUser(long id);
 
-
-
-
 }
